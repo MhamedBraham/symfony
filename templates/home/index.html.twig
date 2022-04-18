@@ -105,16 +105,32 @@
                 <div class="favourite-area">
                     <a href="#"><img src="img/core-img/heart.svg" alt=""></a>
                 </div>
+               
                 <!-- User Login Info -->
                 <div class="user-login-info">
-                    <a href="#"><img src="img/core-img/user.svg" alt=""></a>
+               
+         <a data-toggle="modal" data-target="#modalLoginForm"><img src="img/core-img/user.svg" alt=""></a>
+                 
+                 
+                </div>
+
+           
+
+                 <div >
+                 
+                     {% if app.user %}
+              
+              
+            <p style="margin-top: 15px;margin-left: -11px;margin-bottom:0px;margin-right: 15px; ">{{ app.user.username }}</p><a href="{{ path('app_logout') }}" style="margin-top: -60px; margin-left:-10px">Logout</a>
+             
+            {% endif %}
                 </div>
                 <!-- Cart Area -->
                 <div class="cart-area">
                     <a href="#" id="essenceCartBtn"><img src="img/core-img/bag.svg" alt=""> <span>3</span></a>
                 </div>
             </div>
-
+          
         </div>
     </header>
     <!-- ##### Header Area End ##### -->
@@ -206,8 +222,8 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="hero-content">
-                        <h6>asoss</h6>
-                        <h2>New Collection</h2>
+                        
+                        <h2 style="color:white;">New Collection</h2>
                         <a href="#" class="btn essence-btn">view collection</a>
                     </div>
                 </div>
@@ -294,7 +310,7 @@
                             <div class="product-img">
                                 <img src={{ prodd.picture }} alt="">
                                 <!-- Hover Thumb -->
-                                <img class="hover-img" src="img/product-img/product-2.jpg" alt="">
+                                <img class="hover-img" src={{ prodd.picture }} alt="">
                                 <!-- Favourite -->
                                 <div class="product-favourite">
                                     <a href="#" class="favme fa fa-heart"></a>
@@ -405,6 +421,8 @@
             </div>
 
         </div>
+
+       
     </footer>
     <!-- ##### Footer Area End ##### -->
 
@@ -420,6 +438,39 @@
     <script src="js/classy-nav.min.js"></script>
     <!-- Active js -->
     <script src="js/active.js"></script>
+     <!-- ### modal space ### -->
+        <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <i class="fas fa-envelope prefix grey-text"></i>
+          <input type="email" id="defaultForm-email" class="form-control validate">
+          <label data-error="wrong" data-success="right" for="defaultForm-email">Your email</label>
+        </div>
+
+        <div class="md-form mb-4">
+          <i class="fas fa-lock prefix grey-text"></i>
+          <input type="password" id="defaultForm-pass" class="form-control validate">
+          <label data-error="wrong" data-success="right" for="defaultForm-pass">Your password</label>
+        </div>
+
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+         <button class="btn btn-lg btn-primary" type="submit">
+        Sign in
+    </button>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 
