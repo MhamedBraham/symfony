@@ -1,0 +1,56 @@
+
+{% block title %}Liste{% endblock %}
+
+{% block body %}
+
+<h1>Liste des Produits de la categorie : {{ categorie.name }}</h1>
+
+
+<div class="container">
+   {% for message in app.flashes('notice') %}
+    
+    <div class="alert alert-success" role="alert">
+  {{ message }}
+</div>
+{% endfor %} 
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">productname</th>
+      <th scope="col">type</th>
+      <th scope="col">qte</th>
+      <th scope="col">price</th>
+      <th scope="col">descriptions</th>
+      <th scope="col">picture</th>
+      <th scope="col">likes</th>
+      <th scope="col">size</th>
+      <th scope="col">color</th>
+      <th scope="col">boutiqueid</th>
+
+    </tr>
+  </thead>
+  <tbody>
+ {% for p in Products %}
+    <tr>
+      <th scope="row">{{ p.id }}</th>
+      <td>{{ p.productname }}</td>
+      <td>{{ p.type }}</td>
+      <td>{{ p.qte }}</td>
+      <td>{{ p.price }}</td>
+      <td>{{ p.descriptions }}</td>
+      <td>{{ p.picture }}</td>
+      <td>{{ p.likes }}</td>
+      <td>{{ p.size }}</td>
+      <td>{{ p.color }}</td>
+      <td>{{ p.boutiqueid }}</td>
+      <td>{{ p.categorie.name }}</td>
+      
+    </tr>
+      {% endfor %}
+    </tbody>
+</table>
+</div>
+
+{% endblock %}

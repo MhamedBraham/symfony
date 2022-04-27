@@ -2,13 +2,26 @@
 
 namespace App\Controller;
 use App\Entity\Product;
+use App\Entity\Categorie;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use App\Repository\ProductRepository;
+use App\Repository\CategorieRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
 
 class HomeController extends AbstractController
 {
+
+    private $repos;
+    private $doctrine;
+    public function __construct(ProductRepository $repos,ManagerRegistry $doctrine)
+    {
+       $this->repos = $repos;
+       $this->doctrine = $doctrine;
+    }
     /**
      * @Route("/", name="app_home")
      */
@@ -30,6 +43,20 @@ class HomeController extends AbstractController
             
         
     }
+
+      /**
+     * @Route("/prod/{id}", name="app_list_prod_categ")
+     */
+    public function listProdParCateg($id): Response
+    {
+         $categorie= $this->doctrine->getRepository(Categorie::class)->find($id);
+       
+        $Products = $this->repos->findBy(['categorie'=> $categorie]);
+       // dd($Products);
+        return $this->render('home/listparCateg.html.twig', ["Products" => $Products,"categorie" =>$categorie]);
+    }
+
+     
 
 
     /**
@@ -56,4 +83,5 @@ class HomeController extends AbstractController
             
         ]);
     }
+    
 }

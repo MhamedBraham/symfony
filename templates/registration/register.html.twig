@@ -9,7 +9,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+	<link rel="icon" type="image/png" href="https://936112.smushcdn.com/2442076/wp-content/uploads/2021/09/cropped-logo-alkhomsa-favicon.png?lossy=1&strip=1&webp=1"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
@@ -39,9 +39,14 @@
 				
 
 {% block body %}
+<!-- Bootstrap CSS -->
+
+    
     <h1>Register</h1>
 
     {{ form_start(registrationForm) }}
+
+
         {{ form_row(registrationForm.email) }}
         {{ form_row(registrationForm.plainPassword, {
             label: 'Password'

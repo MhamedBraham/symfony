@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -66,6 +68,12 @@ class Product
      * @ORM\Column(type="integer")
      */
     private $boutiqueid;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="products")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $categorie;
 
     public function getId(): ?int
     {
@@ -188,6 +196,18 @@ class Product
     public function setBoutiqueid(int $boutiqueid): self
     {
         $this->boutiqueid = $boutiqueid;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): self
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }
