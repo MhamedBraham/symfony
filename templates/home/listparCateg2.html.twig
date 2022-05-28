@@ -1,95 +1,84 @@
-
 {% extends 'base.html.twig' %}
 {% block body %}
             <!-- Header Meta Data -->
             <div class="header-meta d-flex clearfix justify-content-end" style="margin-left: 400px ; margin-top:-50px;">
                 <!-- Search Area -->
                 <div class="search-area">
-                    <form action="#" method="post">
-                        <input type="search" name="search" id="headerSearch" placeholder="Type for search">
+                    {{ form_start(form) }} 
                         <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                    </form>
+                   {{ form_end(form) }}
                 </div>
                 <!-- Favourite Area -->
                 <div class="favourite-area">
-                    <a href="#"><img src="{{asset('img/core-img/heart.svg')}}"alt=""></a>
+                    <a href="#"><img src="img/core-img/heart.svg" alt=""></a>
                 </div>
                 <!-- User Login Info -->
+                 <!-- User Login Info -->
                 <div class="user-login-info">
-                    <a href="#"><img src="{{asset('img/core-img/user.svg')}}"alt=""></a>
+               
+         <a data-toggle="modal" data-target="#modalLoginForm"><img src="img/core-img/user.svg" alt=""></a>
+                 
+                 
+                </div>
+
+           
+
+                 <div >
+                 
+                     {% if app.user %}
+              
+              
+            <p style="margin-top: 15px;margin-left: -11px;margin-bottom:0px;margin-right: 15px; ">{{ app.user.username }}</p><a href="{{ path('app_logout') }}" style="margin-top: -60px; margin-left:-10px">Logout</a>
+             
+            {% endif %}
                 </div>
                 <!-- Cart Area -->
-                <div class="cart-area">
-                    <a href="#" id="essenceCartBtn"><img src="{{asset('img/core-img/bag.svg')}}" alt=""> <span>3</span></a>
+              <div class="cart-area">
+                    <a href="#" id="essenceCartBtn"><img src="img/core-img/bag.svg" alt=""> <span>{{items|length}}</span></a>
                 </div>
+            
             </div>
 
         </div>
     </header>
     <!-- ##### Header Area End ##### -->
 
-    <!-- ##### Right Side Cart Area ##### -->
+   <!-- ##### Right Side Cart Area ##### -->
     <div class="cart-bg-overlay"></div>
 
     <div class="right-side-cart-area">
 
         <!-- Cart Button -->
         <div class="cart-button">
-            <a href="#" id="rightSideCart"><img src="{{asset('img/core-img/bag.svg')}}" alt=""> <span>3</span></a>
+            <a href="#" id="rightSideCart"><img src="img/core-img/bag.svg" alt=""> <span>{{items|length}}</span></a>
         </div>
-
+        {% if items | length > 0 %}
         <div class="cart-content d-flex">
 
             <!-- Cart List Area -->
+           
             <div class="cart-list">
                 <!-- Single Cart Item -->
+                 {% for item in items %}
                 <div class="single-cart-item">
+                
                     <a href="#" class="product-image">
-                        <img src="img/product-img/product-1.jpg" class="cart-thumb" alt="">
+                        <img src={{ item.product.picture }} class="cart-thumb" alt="">
                         <!-- Cart Item Desc -->
                         <div class="cart-item-desc">
-                          <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
-                            <span class="badge">Mango</span>
-                            <h6>Button Through Strap Mini Dress</h6>
-                            <p class="size">Size: S</p>
-                            <p class="color">Color: Red</p>
-                            <p class="price">$45.00</p>
+                            <span class="product-remove" onclick="window.location.href='{{ path('cart_remove2', {'id': item.product.id}) }}';"><i class="fa fa-close" aria-hidden="true" ></i></span>
+                            <span class="badge">{{ item.product.productname }}</span>
+                            <p class="size">{{ item.product.price }}</p>
+                            <p class="size">{{ item.product.size }}</p>
+                            <p class="color">{{ item.quantity }}</p>
+                            <p class="price">{{ item.product.price * item.quantity }}</p>
                         </div>
                     </a>
                 </div>
-
-                <!-- Single Cart Item -->
-                <div class="single-cart-item">
-                    <a href="#" class="product-image">
-                        <img src="img/product-img/product-2.jpg" class="cart-thumb" alt="">
-                        <!-- Cart Item Desc -->
-                        <div class="cart-item-desc">
-                          <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
-                            <span class="badge">Mango</span>
-                            <h6>Button Through Strap Mini Dress</h6>
-                            <p class="size">Size: S</p>
-                            <p class="color">Color: Red</p>
-                            <p class="price">$45.00</p>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Cart Item -->
-                <div class="single-cart-item">
-                    <a href="#" class="product-image">
-                        <img src="img/product-img/product-3.jpg" class="cart-thumb" alt="">
-                        <!-- Cart Item Desc -->
-                        <div class="cart-item-desc">
-                          <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
-                            <span class="badge">Mango</span>
-                            <h6>Button Through Strap Mini Dress</h6>
-                            <p class="size">Size: S</p>
-                            <p class="color">Color: Red</p>
-                            <p class="price">$45.00</p>
-                        </div>
-                    </a>
-                </div>
+                {% endfor %}
+               
             </div>
+            
 
             <!-- Cart Summary -->
             <div class="cart-amount-summary">
@@ -99,29 +88,27 @@
                     <li><span>subtotal:</span> <span>$274.00</span></li>
                     <li><span>delivery:</span> <span>Free</span></li>
                     <li><span>discount:</span> <span>-15%</span></li>
-                    <li><span>total:</span> <span>$232.00</span></li>
+                    <li><span>total:</span> <span>${{total}}</span></li>
                 </ul>
+                
                 <div class="checkout-btn mt-100">
                     <a href="checkout.html" class="btn essence-btn">check out</a>
                 </div>
             </div>
         </div>
+        {% else %}
+     <p>Surprise, c'est vide !</p>
+{% endif %}
     </div>
     <!-- ##### Right Side Cart End ##### -->
 
     <!-- ##### Breadcumb Area Start ##### -->
-    <div class="breadcumb_area bg-img" style="background-image: url(https://media.istockphoto.com/photos/moorish-mosaic-background-picture-id1002113596?k=20&m=1002113596&s=612x612&w=0&h=ofYr7CIYFgCsXSWN9z8x-jOGx5iGwGNMEqXfMkPXIBg=);margin-top: 100px;width='100' ;height="100"">
+    <div class="breadcumb_area bg-img" style="background-image: url(https://samak-deco.fr/img/uploads/Article%204_Tapis%20berb%C3%A8res%20tunisiens_Samak_Artisanat%20tunisien.png);">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="page-title text-center">
-                     
-                     {% for c in Products %}
-
-                         <h2>{{ c.categorie.name }}</h2>
-                         
-                     {% endfor %}     
-
+                        <h2>All products</h2>
                     </div>
                 </div>
             </div>
@@ -129,7 +116,9 @@
     </div>
     <!-- ##### Breadcumb Area End ##### -->
 
+
     <!-- ##### Shop Grid Area Start ##### -->
+   
     <section class="shop_grid_area section-padding-80">
         <div class="container">
             <div class="row">
@@ -282,8 +271,8 @@
                         </div>
 
                         <div class="row">
+                            {% for p in products %}
 
-                             {% for p in Products %}
                             <!-- Single Product -->
                             <div class="col-12 col-sm-6 col-lg-4">
                                 <div class="single-product-wrapper">
@@ -314,15 +303,16 @@
                                         <!-- Hover Content -->
                                         <div class="hover-content">
                                             <!-- Add to Cart -->
-                                            <div class="add-to-cart-btn">
-                                                <a href="#" class="btn essence-btn">Add to Cart</a>
-                                            </div>
+                                           <div class="add-to-cart-btn">
+                                        <a href="{{ path('cart_add2', {'id': p.id}) }}" class="btn essence-btn">Add to Cart</a>
+                                    </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                                 {% endfor %}
-                           
+
+                             {% endfor %}
+
                         </div>
                     </div>
                     <!-- Pagination -->
@@ -439,5 +429,4 @@
 </body>
 
 </html>
-
 {% endblock %}

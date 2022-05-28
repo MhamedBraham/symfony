@@ -7,7 +7,6 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
-
 /**
  * @method Product|null find($id, $lockMode = null, $lockVersion = null)
  * @method Product|null findOneBy(array $criteria, array $orderBy = null)
@@ -44,23 +43,6 @@ class ProductRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
-
-
-    /**
-     * Recherche les produit en fonction du formulaire
-     * @return void 
-     */
-    public function search($mots){
-        $query = $this->createQueryBuilder('a');
-        
-        if($mots != null){
-            $query->andWhere('MATCH_AGAINST(a.productname, a.descriptions) AGAINST (:mots boolean)>0')
-                ->setParameter('mots', $mots);
-        }
-        
-        return $query->getQuery()->getResult();
-    }
-
 
     // /**
     //  * @return Product[] Returns an array of Product objects

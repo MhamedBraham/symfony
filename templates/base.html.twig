@@ -1,19 +1,100 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+<head>
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title  -->
+    <title>ART - SHOP</title>
+
+    <!-- Favicon  -->
+    <link rel="icon" href="https://936112.smushcdn.com/2442076/wp-content/uploads/2021/09/cropped-logo-alkhomsa-favicon.png?lossy=1&strip=1&webp=1">
+
+    <!-- Core Style CSS -->
+    <link rel="stylesheet" href="{{asset('css/core-style.css')}}">
+    <link rel="stylesheet" href="{{asset('style.css')}}">
+
+</head>
     <body>
-        {% block body %}{% endblock %}
-    </body>
-</html>
+         <!-- ##### Header Area Start ##### -->
+    <header class="header_area">
+        <div class="classy-nav-container breakpoint-off d-flex align-items-center justify-content-between" >
+            <!-- Classy Menu -->
+            <nav class="classy-navbar" id="essenceNav">
+                <!-- Logo -->
+                <a class="nav-brand" href="index.html">ART - SHOP</a>
+                <!-- Navbar Toggler -->
+                <div class="classy-navbar-toggler">
+                    <span class="navbarToggler"><span></span><span></span><span></span></span>
+                </div>
+                <!-- Menu -->
+                <div class="classy-menu">
+                    <!-- close btn -->
+                    <div class="classycloseIcon">
+                        <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                    </div>
+                    <!-- Nav Start -->
+                    <div class="classynav">
+                        <ul>
+                            <li><a href="#">Shop</a>
+                                <div class="megamenu">
+                                    <ul class="single-mega cn-col-4">
+                                        <li class="title">clothing</li>
+                                        <li><a href="shop.html">Dresses</a></li>
+                                        <li><a href="shop.html">Blouses &amp; Shirts</a></li>
+                                        <li><a href="shop.html">T-shirts</a></li>
+                                        <li><a href="shop.html">Rompers</a></li>
+                                        <li><a href="shop.html">Bras &amp; Panties</a></li>
+                                    </ul>
+                                    <ul class="single-mega cn-col-4">
+                                        <li class="title">Decorations</li>
+                                        <li><a href="shop.html">T-Shirts</a></li>
+                                        <li><a href="shop.html">Polo</a></li>
+                                        <li><a href="shop.html">Shirts</a></li>
+                                        <li><a href="shop.html">Jackets</a></li>
+                                        <li><a href="shop.html">Trench</a></li>
+                                    </ul>
+                                    <ul class="single-mega cn-col-4">
+                                        <li class="title">Accessories</li>
+                                        <li><a href="shop.html">Dresses</a></li>
+                                        <li><a href="shop.html">Shirts</a></li>
+                                        <li><a href="shop.html">T-shirts</a></li>
+                                        <li><a href="shop.html">Jackets</a></li>
+                                        <li><a href="shop.html">Trench</a></li>
+                                    </ul>
+                                    <div class="single-mega cn-col-4">
+                                        <img src="https://tunisie.co/uploads/images/content/artisanat-251019-1.jpg" alt="">
+                                    </div>
+                                </div>
+                            </li>
+                            <li><a href="#">Pages</a>
+                                <ul class="dropdown">
+                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="shop.html">Shop</a></li>
+                                    <li><a href="single-product-details.html">Product Details</a></li>
+                                    <li><a href="checkout.html">Checkout</a></li>
+                                    <li><a href="blog.html">Blog</a></li>
+                                    <li><a href="single-blog.html">Single Blog</a></li>
+                                    <li><a href="regular-page.html">Regular Page</a></li>
+                                    <li><a href="contact.html">Contact</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                    <!-- Nav End -->
+                </div>
+            </nav>
+            
+            
+
+        <div class="container pt-5"> {% block body %}{% endblock %}
+            </div>
+           
+        </body>
+    </html>
