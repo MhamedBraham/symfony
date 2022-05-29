@@ -28,7 +28,7 @@
                      {% if app.user %}
               
               
-            <p style="margin-top: 15px;margin-left: -11px;margin-bottom:0px;margin-right: 15px; ">{{ app.user.username }}</p><a href="{{ path('app_logout') }}" style="margin-top: -60px; margin-left:-10px">Logout</a>
+            <p style="margin-top: 15px;margin-left: -11px;margin-bottom:0px;margin-right: 15px; ">{{ app.user.username }}</p> <a href="{{ path('admin') }}" style="margin-top: -60px; margin-left:-10px">profil</a> , <a href="{{ path('app_logout') }}" style="margin-top: -60px; margin-left: 4px">Logout</a> 
              
             {% endif %}
                 </div>
