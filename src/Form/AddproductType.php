@@ -7,7 +7,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-
 class AddproductType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -23,9 +22,7 @@ class AddproductType extends AbstractType
             ->add('size')
             ->add('color')
             ->add('boutiqueid')
-            ->add('Categorie')
-            
-            
+            ->add('categorie')
         ;
     }
 

@@ -46,9 +46,9 @@ class ProductaddController extends AbstractController
             $productRepository->add($product);
             return $this->redirectToRoute('productlist', [], Response::HTTP_SEE_OTHER);
         }
-        return $this->render('productadd/index.html.twig', [
+        return $this->renderForm('productadd/index.html.twig', [
             'product' => $product,
-            "form" => $form->createView(),
+            "form" => $form,
         ]);
     }
 
