@@ -85,4 +85,17 @@ class ProductaddController extends AbstractController
         ]);
         
     }
+
+ /**
+     * @Route("/supp/{id}", name="product_supp", methods={"POST"})
+     */
+    public function delete(Request $request, Product $product, ProductRepository $productRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
+            $productRepository->remove($product);
+        }
+
+        return $this->redirectToRoute('productlist', [], Response::HTTP_SEE_OTHER);
+    }
+
 }

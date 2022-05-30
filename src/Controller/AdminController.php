@@ -14,6 +14,8 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Form\SearchAnnonceType;
+use App\Entity\Contact;
+
 
 class AdminController extends AbstractController
 {
@@ -62,7 +64,7 @@ class AdminController extends AbstractController
      * 
      * @return Response
      */
-    public function delete2(Productadd $product)
+    public function delete2(Product $product)
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($product);
@@ -70,4 +72,6 @@ class AdminController extends AbstractController
 
         return $this->redirectToRoute('productlist');
     }
+
+    
 }
