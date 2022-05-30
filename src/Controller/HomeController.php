@@ -13,7 +13,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Form\SearchAnnonceType;
-
+use App\Entity\Panier;
 
 class HomeController extends AbstractController
 {
@@ -155,28 +155,24 @@ class HomeController extends AbstractController
 
 
     /**
-     * @Route("/product/add/{productname}/{type}/{qte}/{price}/{descriptions}/{picture}/{likes}/{size}/{color}/{boutiqueid}", name="app_product_add")
+     * @Route("/panier/{id_prod}/{id_user}/{qte}", name="app_product_add")
      */
-    public function add($productname,$type,$qte,$price,$descriptions,$picture,$likes,$size,$color,$boutiqueid): Response
+    public function add12($id_prod , $id_user ,$qte): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $product = new Product();
-        $product->setProductname($productname);
-        $product->setType($type);
-        $product->setQte($qte);
-        $product->setPrice($price);
-        $product->setDescriptions($descriptions);
-        $product->setPicture($picture);
-        $product->setLikes($likes);
-        $product->setSize($size);
-        $product->setColor($color);
-        $product->setBoutiqueid($boutiqueid);
-        $entityManager->persist($product);
+        $addpanier = new Panier();
+
+        $addpanier->setProductId($id_prod);
+        $addpanier->setUserId($id_user);
+        $addpanier->setProductname("h");
+        $addpanier->setQte($qte);
+
+        $entityManager->persist($addpanier);
         $entityManager->flush();
 
-        return $this->render('product/add.html.twig', ["productname"=>$productname,"type"=>$type,"qte"=>$qte,"price"=>$price,"descriptions"=>$descriptions,"picture"=>$picture,"likes"=>$likes,"size"=>$size,"color"=>$color,"boutiqueid"=>$boutiqueid
-            
-        ]);
+       // return $this->render('product/add.html.twig', ["productname"=>$productname,"type"=>$type,"qte"=>$qte,"price"=>$price,"descriptions"=>$descriptions,"picture"=>$picture,"size"=>$size,"color"=>$color
+       return $this->redirectToRoute("app_home");
+        
     }
 
     /**
@@ -197,18 +193,18 @@ class HomeController extends AbstractController
     }  
 
  /**
-     * @Route("/panier/add/{id}", name="cart_add")
+     * @Route("/panier/add/{id_prod}", name="cart_add5")
      */
     
-    public function add2($id, SessionInterface $session) 
+    public function add5($id_prod , SessionInterface $session) 
     {
-    
+
      $panier=$session->get('panier', []);
     
-     if(!empty($panier[$id])){
-        $panier[$id]++;
+     if(!empty($panier[$id_prod])){
+        $panier[$id_prod]++;
      }else{
-        $panier[$id] = 1;
+        $panier[$id_prod] = 1;
      }
     
      $session->set('panier', $panier);
@@ -216,6 +212,48 @@ class HomeController extends AbstractController
     return $this->redirectToRoute("app_home");
     
     }
+ /**
+     * @Route("/panier/add/{id_prod}/{id_user}/{type}/{qte}/{price}/{size}/{color}", name="cart_add")
+     */
+ 
+    public function add2($id_prod , $id_user,$type , $qte , $price , $size , $color, SessionInterface $session) 
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $addpanier = new Panier();
+
+        $addpanier->setProductId($id_prod);
+        $addpanier->setUserId($id_user);
+        $addpanier->setProductname("hh");
+        $addpanier->setType($type);
+        $addpanier->setQte($qte);
+        $addpanier->setPrice($price);
+        $addpanier->setDescriptions("dd");
+        $addpanier->setPicture("ff");
+        $addpanier->setSize($size);
+        $addpanier->setColor($color);
+
+
+
+        $em = $this->getDoctrine()->getManager();
+
+            $em->persist($addpanier);
+            $em->flush();
+
+     $panier=$session->get('panier', []);
+    
+     if(!empty($panier[$id_prod])){
+        $panier[$id_prod]++;
+     }else{
+        $panier[$id_prod] = 1;
+     }
+    
+     $session->set('panier', $panier);
+    
+    return $this->redirectToRoute("app_home");
+    
+    }
+
 
     /**
      * @Route("/panier2/add/{id}", name="cart_add2")

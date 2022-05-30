@@ -117,7 +117,7 @@
     </section>
     <!-- ##### Welcome Area End ##### -->
 
-
+ 
     <!-- ##### Top Catagory Area Start ##### -->
     <div class="top_catagory_area section-padding-80 clearfix">
         <div class="container">
@@ -215,18 +215,29 @@
                                 <div class="hover-content">
                                     <!-- Add to Cart -->
                                     <div class="add-to-cart-btn">
-                                        <a href="{{ path('cart_add', {'id': prodd.id}) }}" class="btn essence-btn">Add to Cart</a>
+                                    {% if app.user %}
+              
+              
+                                         <a href="{{ path('cart_add', {'id_prod': prodd.id , 'id_user' : app.user.id  , 'type' : prodd.type ,  'qte': prodd.qte , 'price': prodd.price ,'size': prodd.size , 'color':prodd.color }) }}" class="btn essence-btn">Add to Cart</a>
+                                        {% else %}
+
+                                         <a href="{{ path('cart_add5', {'id_prod': prodd.id }) }}" class="btn essence-btn">Add to Cart</a>
+
+                                    {% endif %}
+
                                     </div>
                                 </div>
                             </div>
                            
                         </div>
                          {% endfor %}
+                         
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
     <!-- ##### New Arrivals Area End ##### -->
 
 
